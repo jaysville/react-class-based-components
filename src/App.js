@@ -1,24 +1,22 @@
-import { Route, Switch } from "react-router-dom";
-import AllMeetupsPage from "./pages/AllMeetups";
-import NewMeetupPage from "./pages/NewMeetup";
-import FavoritesPage from "./pages/Favorites";
-import Layout from "./components/layout/Layout";
-
+import UserFinder from "./components/UserFinder";
+import classes from "./components/UserFinder.module.css";
+import UsersContext from "./store/users-context";
 function App() {
+  const DUMMY_USERS = [
+    { id: "u1", name: "Max" },
+    { id: "u2", name: "Manuel" },
+    { id: "u3", name: "Julie" },
+  ];
+  const usersContext = {
+    users: DUMMY_USERS,
+  };
+
   return (
-    <Layout>
-      <Switch>
-        <Route path="/" exact>
-          <AllMeetupsPage />
-        </Route>
-        <Route path="/new-meetups">
-          <NewMeetupPage />
-        </Route>
-        <Route path="/favorites">
-          <FavoritesPage />
-        </Route>
-      </Switch>
-    </Layout>
+    <UsersContext.Provider value={usersContext}>
+      <div className={classes.finder}>
+        <UserFinder />
+      </div>
+    </UsersContext.Provider>
   );
 }
 
